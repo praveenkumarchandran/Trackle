@@ -1,8 +1,8 @@
-import React from "react";
+import React, { use } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { ReactComponent as Logo } from "./assets/logo.svg";
 import { ReactComponent as Girl } from "./assets/girlstand.svg";
-import { styled } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import Divider from "@mui/material/Divider";
 import { useState } from "react";
 import IconButton from "@mui/material/IconButton";
@@ -25,6 +25,8 @@ const Form = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
+  const theme = useTheme(); 
+
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
@@ -36,7 +38,7 @@ const Form = () => {
     <Box
       sx={{
         display: "flex",
-        flexDirection: "row",
+        flexDirection: { xs: "column", md: "row" },
         flex: 'wrap',
         
       }}
@@ -50,8 +52,14 @@ const Form = () => {
             borderRadius: "16px",
             gap: "33px",
             boxShadow: "0px 2px 8px 0px rgba(99, 99, 99, 0.2)",
-            width: "620px",
-            margin: "92px 96px 52px 66px",
+            //width: "320px",
+            //margin: "92px 96px 52px 66px",
+            margin: {
+              xs: '50px',
+              md: '92px 96px 52px 66px',
+              lg: '92px 96px 52px 66px',
+              xl: '92px 96px 52px 66px',
+            }
           }}
         >
           <Logo />
@@ -71,7 +79,10 @@ const Form = () => {
             </Root>
           </Box>
           <Box>
-            <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Box sx={{ 
+              display: "flex", 
+              flexDirection: {xs: "column", md: "row"} 
+              }}>
               <Box>
                 <Typography sx={{
                   fontSize: "14px",
@@ -81,7 +92,7 @@ const Form = () => {
                 <FormControl
                   sx={{
                     m: 1,
-                    width: "262px",  
+                width: "262px",  
                     height: "30px",  
                     border: "1px solid #D0D5DD",
                     borderRadius: "8px",
@@ -177,7 +188,7 @@ const Form = () => {
               <FormControl
                 sx={{
                   m: 1,
-                  width: "262px", 
+              width: "262px", 
                   height: "30px", 
                   border: "1px solid #D0D5DD",
                   borderRadius: "8px",
@@ -240,28 +251,49 @@ const Form = () => {
         </Box>
         <Box
           sx={{
-            paddingLeft: "10%",
+              // display: 'flex',
+              // flexDirection: {
+              //     xs: 'column',
+              //     md: 'column',
+              // }
           }}
         >
           <Typography
             sx={{
-              paddingLeft: "10%",
               fontFamily: "poppins",
               fontSize: "16px",
               fontWeight: "500",
+              paddingLeft: '13%',
+              margin: '71px 53px 58px 53px',
+              [theme.breakpoints.down('md')]: { 
+                display:'none'
+              }
+              
+             
             }}
           >
-            © 2024, Jseven Technology Pvt. Ltd. All Rights Reserved.
+            © 2024, Jseven Technology Pvt. Ltd. 
+            All Rights Reserved.
           </Typography>
         </Box>
+      
       </Box>
+     
       <Box
         sx={{
           backgroundImage: `url(${process.env.PUBLIC_URL + "blu.png"})`,
-          width: '100%',
-          height: "100vh",
+          //width: '100%',
+          flexBasis: {
+            xs: '40%',
+            md: '70%',
+          },
+          height: {
+            xs: '40%',
+            md: '100%',
+          },
           backgroundSize: "cover",
           backgroundPosition: "center",
+          
         }}
 
       >
@@ -279,6 +311,33 @@ const Form = () => {
           }} />
         </Box>
       </Box>
+      <Box
+          sx={{
+              // display: 'flex',
+              // flexDirection: {
+              //     xs: 'column',
+              //     md: 'column',
+              // }
+          }}
+        >
+          <Typography
+            sx={{
+              fontFamily: "poppins",
+              fontSize: "16px",
+              fontWeight: "500",
+              paddingLeft: '13%',
+              margin: '71px 53px 58px 53px',
+              [theme.breakpoints.up('md')]: { 
+                display:'none'
+              }
+              
+             
+            }}
+          >
+            © 2024, Jseven Technology Pvt. Ltd. 
+            All Rights Reserved.
+          </Typography>
+        </Box>
     </Box>
   );
 };
